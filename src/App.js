@@ -8,6 +8,7 @@ import Information from './components/Information';
 import Gallery from './components/Gallery';
 import MenuCategory from './components/MenuCategory';
 import FoodMenu from './components/FoodMenu';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
       <Gallery/>
       <MenuCategory/>
       <FoodMenu/>
+      <Footer/>
     </div>
   );
 }
