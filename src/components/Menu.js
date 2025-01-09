@@ -18,6 +18,7 @@ const Menu = () => {
             className="image-cover"
           />
           <h2 className="text-xl font-semibold text-gray-800">Menu</h2>
+          <a href="#asdfghgfdxz" className="btn bg-[#2D1717] rounded-lg px-2 py-1 text-white text-sm">See More</a>
         </div>
 
         <div className="bg-white shadow-md rounded-lg p-4 flex flex-col items-center">
