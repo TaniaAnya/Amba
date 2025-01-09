@@ -6,6 +6,8 @@ import About from './components/About'
 import Information from './components/Information';
 // import Admin from './components/Admin';
 import Gallery from './components/Gallery';
+import MenuCategory from './components/MenuCategory';
+import FoodMenu from './components/FoodMenu';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
       <Information/>
       {/* <Admin/> */}
       <Gallery/>
+      <MenuCategory/>
+      <FoodMenu/>
     </div>
   );
 }
