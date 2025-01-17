@@ -1,8 +1,8 @@
 import React from 'react';
-import matchaa from '../components/asset/matchaa.png';
 import milow from './asset/milow.png'
 import RedVelvet from './asset/RedVelvet.png'
 import Teh from './asset/Teh.png'
+import matchaa from './asset/matchaa.png'
 import coklat from './asset/coklat.png'
 import kopsu from './asset/kopsu.png'
 import lemon from './asset/lemon.png'
@@ -14,7 +14,7 @@ import Fruit from './asset/Fruit.png'
 const foodItems = [
   {
     id: 1,
-    name: 'matcha',
+    name: 'Matcha',
     description: 'Teh hijau dan susu yang menghasilkan rasa creamy dengan pahit khas matcha.',
     price: '20k',
     image: matchaa,
@@ -77,7 +77,7 @@ const foodItems = [
   },
 ];
 
-const FoodMenu = () => {
+const Snack = () => {
   // Menggunakan React.createElement untuk membuat elemen
   return React.createElement(
     'div',
@@ -85,7 +85,7 @@ const FoodMenu = () => {
     React.createElement(
       'h1',
       { className: 'text-4xl font-bold text-center text-stone-100 mb-8' },
-      'Coffee Series'
+      'Snack Series'
     ),
     // Daftar makanan
     React.createElement(
@@ -128,4 +128,4 @@ const FoodMenu = () => {
   );
 };
 
-export default FoodMenu;
+export default Snack;

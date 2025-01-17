@@ -1,101 +1,122 @@
-import React from "react";
+import React, { useRef } from "react";
+import customer from "./asset/customer.jpg";
+import kaca from "./asset/kaca.jpg";
+import couple from "./asset/couple.jpg";
+import caffe from "./asset/caffe.jpg";
 
 const Gallery = () => {
+  const scrollContainerRef = useRef(null);
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: -200, // Scroll ke kiri sebanyak 200px
+        behavior: 'smooth', // Animasi smooth scroll
+      });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: 200, // Scroll ke kanan sebanyak 200px
+        behavior: 'smooth', // Animasi smooth scroll
+      });
+    }
+  };
+
   return (
-    <div className="flex h-screen">
-      {/* Sidebar */}
-      <div className="w-1/5 bg-teal-200 p-4">
-        <div className="mb-8">
-          <h1 className="text-xl font-bold">KOPI AMBA</h1>
-        </div>
-        <nav className="space-y-4">
-          <a href="#" className="block text-gray-700 font-medium hover:text-black">
-            Menu
-          </a>
-          <a href="#" className="block text-gray-700 font-medium hover:text-black">
-            Promotion
-          </a>
-          <a href="#" className="block text-gray-700 font-medium hover:text-black">
-            Gallery
-          </a>
-          <a href="#" className="block text-gray-700 font-medium hover:text-black">
-            Information
-          </a>
-        </nav>
-      </div>
+    <div className="bg-yellow-900 min-h-screen flex flex-col items-center justify-center">
+      {/* Header */}
+      <h1 className="text-4xl font-semibold text-white mb-8">Our Gallery</h1>
 
-      {/* Main Content */}
-      <div className="w-4/5 p-6 bg-beige">
-        <header className="flex justify-between items-center mb-6">
-          <input
-            type="text"
-            placeholder="Search jobs or projects"
-            className="border px-4 py-2 rounded-lg w-1/2"
-          />
-          <div className="flex items-center space-x-2">
+      {/* Gallery Container with horizontal scrolling */}
+      <div className="relative">
+        {/* Tombol Panah Kiri */}
+        <button
+          onClick={scrollLeft}
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white text-gray-800 p-2 rounded-full shadow-lg"
+        >
+          &#8592;
+        </button>
+
+        <div
+          ref={scrollContainerRef}
+          className="flex gap-4 overflow-x-auto py-4 snap-x snap-mandatory"
+        >
+          {/* Image Card 1 */}
+          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
             <img
-              src="https://via.placeholder.com/40"
-              alt="User"
-              className="w-10 h-10 rounded-full"
+              src={customer}
+              alt="Customer enjoying coffee"
+              className="w-[170px] h-auto object-cover"
             />
-            <span className="font-semibold">Keynatasha</span>
           </div>
-        </header>
 
-        {/* Gallery */}
-        <div>
-          <button className="mb-4 text-gray-600 hover:text-black flex items-center">
-            <span>&larr;</span>
-            <span className="ml-2">Back</span>
-          </button>
+          {/* Image Card 2 */}
+          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
+            <img
+              src={kaca}
+              alt="Coffee shop seating"
+              className="w-[170px] h-auto object-cover"
+            />
+          </div>
 
-          <div className="grid grid-cols-3 gap-4">
-            <div className="bg-gray-200 flex justify-center items-center border border-gray-300 rounded-lg">
-              <button className="text-2xl font-bold">+</button>
-            </div>
+          {/* Image Card 3 */}
+          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
             <img
-              src="https://via.placeholder.com/150"
-              alt="Gallery item"
-              className="w-full h-40 object-cover rounded-lg"
+              src={couple}
+              alt="Couple at the cafe"
+              className="w-[227px] h-auto object-cover"
             />
+          </div>
+
+          {/* Image Card 4 */}
+          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
             <img
-              src="https://via.placeholder.com/150"
-              alt="Gallery item"
-              className="w-full h-40 object-cover rounded-lg"
+              src={caffe}
+              alt="Customers enjoying coffee"
+              className="w-[245px] h-auto object-cover"
             />
+          </div>
+
+          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
             <img
-              src="https://via.placeholder.com/150"
-              alt="Gallery item"
-              className="w-full h-40 object-cover rounded-lg"
+              src={customer}
+              alt="Customer enjoying coffee"
+              className="w-[170px] h-auto object-cover"
             />
+          </div>
+
+          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
             <img
-              src="https://via.placeholder.com/150"
-              alt="Gallery item"
-              className="w-full h-40 object-cover rounded-lg"
+              src={kaca}
+              alt="Coffee shop seating"
+              className="w-[170px] h-auto object-cover"
             />
+          </div>
+
+           {/* Image Card 4 */}
+           <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
             <img
-              src="https://via.placeholder.com/150"
-              alt="Gallery item"
-              className="w-full h-40 object-cover rounded-lg"
-            />
-            <img
-              src="https://via.placeholder.com/150"
-              alt="Gallery item"
-              className="w-full h-40 object-cover rounded-lg"
-            />
-            <img
-              src="https://via.placeholder.com/150"
-              alt="Gallery item"
-              className="w-full h-40 object-cover rounded-lg"
-            />
-            <img
-              src="https://via.placeholder.com/150"
-              alt="Gallery item"
-              className="w-full h-40 object-cover rounded-lg"
+              src={caffe}
+              alt="Customers enjoying coffee"
+              className="w-[245px] h-auto object-cover"
             />
           </div>
         </div>
+
+        {/* Tombol Panah Kanan */}
+        <button
+          onClick={scrollRight}
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white text-gray-800 p-2 rounded-full shadow-lg"
+        >
+          &#8594;
+        </button>
       </div>
+
+      {/* Footer Text */}
+      <p className="text-lg text-white italic mt-8">Your Second Home</p>
     </div>
   );
 };

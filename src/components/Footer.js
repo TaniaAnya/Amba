@@ -1,9 +1,10 @@
 import React from "react";
 import Kopi from '../asset/kopi.png';
+import shopeeFood from './asset/shopeeFood.png';
 
 const Footer = () => {
   return (
-    <div>
+    <div id="footer">
       {/* Background Section */}
       <section id="about" className="relative w-full h-screen">
         {/* Background Image */}
@@ -17,20 +18,21 @@ const Footer = () => {
         <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center text-white bg-black bg-opacity-50">
   <h2 className="text-2xl font-bold">Contact</h2>
   <div className="flex justify-center space-x-6 mt-6">
-    <a href="https://wa.me/085520950976" target="_blank" rel="noopener noreferrer" className="text-3xl text-green-400 hover:text-green-300">
+    <a href="https://wa.me/089682227565" target="_blank" rel="noopener noreferrer" className="text-3xl text-green-400 hover:text-green-300">
       <i className="fab fa-whatsapp"></i>
     </a>
-    <a href="https://facebook.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-3xl text-blue-400 hover:text-blue-300">
-      <i className="fab fa-facebook"></i>
-    </a>
-    <a href="mailto:contact@example.com" className="text-3xl text-red-400 hover:text-red-300">
-      <i className="fas fa-envelope"></i>
-    </a>
-    <a href="https://instagram.com/tan_ia126" target="_blank" rel="noopener noreferrer" className="text-3xl text-pink-400 hover:text-pink-300">
+    <a href="https://instagram.com/kopiamba" target="_blank" rel="noopener noreferrer" className="text-3xl text-pink-400 hover:text-pink-300">
       <i className="fab fa-instagram"></i>
     </a>
-    <a href="https://maps.google.com/?q=Your+Location" target="_blank" rel="noopener noreferrer" className="text-3xl text-red-500 hover:text-red-400">
+    <a href="https://maps.google.com/?q=Your+kopi amba" target="_blank" rel="noopener noreferrer" className="text-3xl text-red-500 hover:text-red-400">
       <i className="fas fa-map-marker-alt"></i>
+    </a>
+    <a href="https://shopee.co.id/Kopi Amba" target="_blank" rel="noopener noreferrer" className="text text-red-500 hover:text-red-400">
+      <img 
+        src={shopeeFood} // Ganti dengan path ke gambar logo Shopee
+        alt="Shopee"
+        className="w-6 h-6 sm:w-8 sm:h-8 hover:opacity-80" 
+      />
     </a>
   </div>
 </div>
@@ -49,7 +51,7 @@ const Footer = () => {
                 </div>
                 <p className="mt-4 text-xs text-orange-400">Design & Developed by Powerpuff</p>
             </footer>
-      </section>
+            </section>
     </div>
   );
 };
