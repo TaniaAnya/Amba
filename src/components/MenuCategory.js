@@ -3,6 +3,7 @@ import kopsu from "./asset/kopsuu.jpg"
 import Fruit from "./asset/friutt.png"
 import kentang from "./asset/ktg.png"
 import { Link } from 'react-router-dom';
+import { CircleArrowLeft } from "lucide-react";
 
 
 const MenuCategory = () => {
@@ -14,6 +15,13 @@ const MenuCategory = () => {
         </svg>
       </button>
       <h1 className="text-2xl font-bold text-white mb-10">Choose Your Category</h1>
+      <div className="absolute top-0 left-0 m-4">
+        <Link to={'/'}>
+          <button className="text-white text-sm font-semibold">
+            <CircleArrowLeft />
+          </button>
+        </Link>
+      </div>
       <div className="flex space-x-6">
         {/* Coffee Category */}
         <div className="flex flex-col items-center p-6 bg-neutral-100 rounded-lg shadow-lg">

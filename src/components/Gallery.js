@@ -1,122 +1,60 @@
-import React, { useRef } from "react";
-import customer from "./asset/customer.jpg";
-import kaca from "./asset/kaca.jpg";
-import couple from "./asset/couple.jpg";
-import caffe from "./asset/caffe.jpg";
+import React, { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase"; 
+import { Link, useNavigate } from "react-router-dom";
+import { CircleArrowLeft } from "lucide-react";
 
 const Gallery = () => {
-  const scrollContainerRef = useRef(null);
+  const [galleryImages, setGalleryImages] = useState([]);
 
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
-        left: -200, // Scroll ke kiri sebanyak 200px
-        behavior: 'smooth', // Animasi smooth scroll
-      });
-    }
+  // Fungsi untuk mengambil data gambar dari Firestore
+  const fetchGalleryImages = async () => {
+    const querySnapshot = await getDocs(collection(db, "galleries"));
+    const images = querySnapshot.docs.map((doc) => doc.data());
+    setGalleryImages(images);
   };
 
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
-        left: 200, // Scroll ke kanan sebanyak 200px
-        behavior: 'smooth', // Animasi smooth scroll
-      });
-    }
-  };
+  useEffect(() => {
+    fetchGalleryImages(); // Ambil data saat komponen dimuat
+  }, []);
 
   return (
-    <div className="bg-yellow-900 min-h-screen flex flex-col items-center justify-center">
+    <div className="bg-yellow-900 min-h-screen flex flex-col items-center justify-center py-20">
       {/* Header */}
       <h1 className="text-4xl font-semibold text-white mb-8">Our Gallery</h1>
+      <div className="absolute top-0 left-0 m-4">
+        <Link to={'/'}>
+          <button className="text-white text-sm font-semibold">
+            <CircleArrowLeft />
+          </button>
+        </Link>
+      </div>
 
       {/* Gallery Container with horizontal scrolling */}
-      <div className="relative">
-        {/* Tombol Panah Kiri */}
-        <button
-          onClick={scrollLeft}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white text-gray-800 p-2 rounded-full shadow-lg"
-        >
-          &#8592;
-        </button>
-
-        <div
-          ref={scrollContainerRef}
-          className="flex gap-4 overflow-x-auto py-4 snap-x snap-mandatory"
-        >
-          {/* Image Card 1 */}
-          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
-            <img
-              src={customer}
-              alt="Customer enjoying coffee"
-              className="w-[170px] h-auto object-cover"
-            />
-          </div>
-
-          {/* Image Card 2 */}
-          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
-            <img
-              src={kaca}
-              alt="Coffee shop seating"
-              className="w-[170px] h-auto object-cover"
-            />
-          </div>
-
-          {/* Image Card 3 */}
-          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
-            <img
-              src={couple}
-              alt="Couple at the cafe"
-              className="w-[227px] h-auto object-cover"
-            />
-          </div>
-
-          {/* Image Card 4 */}
-          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
-            <img
-              src={caffe}
-              alt="Customers enjoying coffee"
-              className="w-[245px] h-auto object-cover"
-            />
-          </div>
-
-          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
-            <img
-              src={customer}
-              alt="Customer enjoying coffee"
-              className="w-[170px] h-auto object-cover"
-            />
-          </div>
-
-          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
-            <img
-              src={kaca}
-              alt="Coffee shop seating"
-              className="w-[170px] h-auto object-cover"
-            />
-          </div>
-
-           {/* Image Card 4 */}
-           <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
-            <img
-              src={caffe}
-              alt="Customers enjoying coffee"
-              className="w-[245px] h-auto object-cover"
-            />
-          </div>
+      <div className="w-full max-w-6xl overflow-hidden px-4">
+        <div className="flex space-x-6 overflow-x-scroll no-scrollbar">
+          {galleryImages.length > 0 ? (
+            galleryImages.map((image, index) => (
+              <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden min-w-[250px]">
+                {/* Wrapper dengan rasio 3:4 */}
+                <div className="relative w-[250px] h-[333px] overflow-hidden rounded-lg">
+                  <img
+                    src={image.url}
+                    alt={`Gallery ${index + 1}`}
+                    className="absolute top-0 left-0 w-full h-full object-cover"
+                    onError={(e) => (e.target.src = "https://via.placeholder.com/250x333")}
+                  />
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="text-white">No images available</p>
+          )}
         </div>
-
-        {/* Tombol Panah Kanan */}
-        <button
-          onClick={scrollRight}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white text-gray-800 p-2 rounded-full shadow-lg"
-        >
-          &#8594;
-        </button>
       </div>
 
       {/* Footer Text */}
-      <p className="text-lg text-white italic mt-8">Your Second Home</p>
+      <p className="text-lg text-white italic mt-10">Your Second Home</p>
     </div>
   );
 };

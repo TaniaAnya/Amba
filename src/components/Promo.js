@@ -1,144 +1,49 @@
-import React, { useRef } from "react";
-import Ppilkada from "./asset/Ppilkada.jpg";
-import Pbola from "./asset/Pbola.jpg";
-import Psumpah from "./asset/Psumpah.jpg";
-import Pkopi from "./asset/Pkopi.jpg";
+import React, { useState, useEffect } from "react";
+import { db } from "../firebase";
+import { collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore";
+import { Link, useNavigate } from "react-router-dom";
+import { CircleArrowLeft } from "lucide-react";
 
 const Promo = () => {
-  const scrollContainerRef = useRef(null);
+  const [promos, setPromos] = useState([]);
 
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
-        left: -200, // Scroll ke kiri sebanyak 200px
-        behavior: 'smooth', // Animasi smooth scroll
-      });
-    }
-  };
+  useEffect(() => {
+    fetchPromos();
+  }, []);
 
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
-        left: 200, // Scroll ke kanan sebanyak 200px
-        behavior: 'smooth', // Animasi smooth scroll
-      });
-    }
+  const fetchPromos = async () => {
+    const querySnapshot = await getDocs(collection(db, "promos"));
+    const promoList = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    setPromos(promoList);
   };
 
   return (
-    <div className="bg-yellow-800 min-h-screen flex flex-col items-center justify-center">
-      {/* Header */}
-      <h1 className="text-4xl font-semibold text-white mb-8">PROMO</h1>
-
-      {/* Gallery Container with horizontal scrolling */}
-      <div className="relative">
-        {/* Tombol Panah Kiri */}
-        <button
-          onClick={scrollLeft}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-yellow-700 text-white p-2 rounded-full shadow-lg"
-        >
-          &#8592;
-        </button>
-
-        <div
-          ref={scrollContainerRef}
-          className="flex gap-4 overflow-x-auto py-4 snap-x snap-mandatory"
-        >
-          {/* Image Card 1 */}
-          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
-            <img
-              src={Ppilkada}
-              alt="Promo 1"
-              className="w-[280px] h-auto object-cover"
-            />
-          </div>
-
-          {/* Image Card 2 */}
-          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
-            <img
-              src={Pbola}
-              alt="Promo 2"
-              className="w-[168px] h-auto object-cover"
-            />
-          </div>
-
-          {/* Image Card 3 */}
-          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
-            <img
-              src={Psumpah}
-              alt="Promo 3"
-              className="w-[168px] h-auto object-cover"
-            />
-          </div>
-
-          {/* Image Card 4 */}
-          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
-            <img
-              src={Pkopi}
-              alt="Promo 4"
-              className="w-[224px] h-auto object-cover"
-            />
-          </div>
-
-          {/* Image Card 4 */}
-          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
-            <img
-              src={Psumpah}
-              alt="Promo 4"
-              className="w-[168px] h-auto object-cover"
-            />
-          </div>
-
-          {/* Image Card 4 */}
-          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
-            <img
-              src={Ppilkada}
-              alt="Promo 4"
-              className="w-[280px] h-auto object-cover"
-            />
-          </div>
-
-          {/* Image Card 4 */}
-          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
-            <img
-              src={Pbola}
-              alt="Promo 4"
-              className="w-[168px] h-auto object-cover"
-            />
-          </div>
-
-          {/* Image Card 4 */}
-          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
-            <img
-              src={Pkopi}
-              alt="Promo 4"
-              className="w-[224px] h-auto object-cover"
-            />
-          </div>
-
-          {/* Image Card 4 */}
-          <div className="flex-shrink-0 rounded-lg overflow-hidden shadow-lg snap-start">
-            <img
-              src={Psumpah}
-              alt="Promo 4"
-              className="w-[168px] h-auto object-cover"
-            />
-          </div>
+    <div className="bg-yellow-800 min-h-screen flex flex-col items-center justify-center py-20">
+      <h1 className="text-4xl font-bold text-white mb-10">PROMO</h1>
+       <div className="absolute top-0 left-0 m-4">
+              <Link to={'/'}>
+                <button className="text-white text-sm font-semibold">
+                  <CircleArrowLeft />
+                </button>
+              </Link>
+            </div>
+      <div className="w-full max-w-6xl overflow-hidden px-4">
+        <div className="flex space-x-6 overflow-x-scroll no-scrollbar">
+          {promos.map((promo) => (
+            <div key={promo.id} className="bg-white rounded-lg shadow-lg overflow-hidden min-w-[250px]">
+              <div className="relative w-[250px] h-[333px] overflow-hidden rounded-lg">
+                <img
+                  src={promo.url}
+                  alt="Promo"
+                  className="absolute top-0 left-0 w-full h-full object-cover"
+                  onError={(e) => (e.target.src = "https://via.placeholder.com/250x333")}
+                />
+              </div>
+            </div>
+          ))}
         </div>
-
-        {/* Tombol Panah Kanan */}
-        <button
-          onClick={scrollRight}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-yellow-700 text-white p-2 rounded-full shadow-lg"
-        >
-          &#8594;
-        </button>
       </div>
-
-      {/* Footer Text */}
-      <p className="text-lg text-white italic mt-8">
-        Rasakan Rumah Keduamu Bersama Kopi Amba
-      </p>
+      <p className="text-lg text-white italic mt-10">Your Second Home</p>
     </div>
   );
 };
