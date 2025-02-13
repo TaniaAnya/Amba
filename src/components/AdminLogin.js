@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import { auth, db } from "../firebase"; // Sesuaikan dengan path Firebase Anda
+import { auth, db } from "../firebase"; 
 import kopiku from "./asset/kopiku.png";
 import background from "../components/asset/background.png";
 import { CircleArrowLeft } from "lucide-react";

@@ -21,7 +21,7 @@ const FoodMenu = () => {
     <div className="bg-yellow-800 min-h-screen p-6">
       <h1 className="text-4xl font-bold text-center text-stone-100 mb-8">Coffee Series</h1>
       <div className="absolute top-0 left-0 m-4">
-        <Link to={'/'}>
+        <Link to={'/menu-category'}>
           <button className="text-white text-sm font-semibold">
             <CircleArrowLeft />
           </button>

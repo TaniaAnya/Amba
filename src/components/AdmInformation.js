@@ -87,7 +87,7 @@ const AdmInformation = () => {
         <div className="mt-5 flex gap-3">
           <input type="text" placeholder="Title" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} className="border rounded p-2" />
           <input type="text" placeholder="Description" value={newDescription} onChange={(e) => setNewDescription(e.target.value)} className="border rounded p-2" />
-          <button onClick={handleAddInformation} className="bg-green-400 text-green-800 py-2 px-4 rounded-full">Add</button>
+          <button onClick={handleAddInformation} className="bg-yellow-600 hover:bg-yellow-800 text-white py-2 px-4 rounded-full">Add</button>
         </div>
 
         <div className="grid grid-cols-2 gap-5 mt-5">
@@ -97,8 +97,8 @@ const AdmInformation = () => {
                 <>
                   <input type="text" value={editTitle} onChange={(e) => setEditTitle(e.target.value)} className="text-lg font-semibold text-gray-800 mb-2 border p-2 rounded-md" />
                   <textarea value={editDescription} onChange={(e) => setEditDescription(e.target.value)} className="w-full text-sm text-gray-600 mb-3 p-2 border rounded-md" />
-                  <button onClick={handleUpdate} className="bg-blue-500 text-white py-2 px-4 rounded-full">Save</button>
-                  <button onClick={() => setIsEditing(null)} className="bg-gray-500 text-white py-2 px-4 rounded-full mt-2">Cancel</button>
+                  <button onClick={handleUpdate} className="bg-green-700 hover:bg-green-900 text-white py-2 px-4 rounded-full">Save</button>
+                  <button onClick={() => setIsEditing(null)} className="bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded-full mt-2">Cancel</button>
                 </>
               ) : (
                 <>

@@ -8,7 +8,6 @@ const NonCoffe = () => {
   const [menuItems, setMenuItems] = useState([]);
 
   useEffect(() => {
-    // Query only for Non-Coffee category
     const q = query(collection(db, "menus"), where("category", "==", "Non-Coffee"));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const menuData = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
@@ -22,7 +21,7 @@ const NonCoffe = () => {
     <div className="bg-yellow-800 min-h-screen p-6">
       <h1 className="text-4xl font-bold text-center text-stone-100 mb-8">Non Coffee Series</h1>
       <div className="absolute top-0 left-0 m-4">
-        <Link to={'/'}>
+        <Link to={'/menu-category'}>
           <button className="text-white text-sm font-semibold">
             <CircleArrowLeft />
           </button>

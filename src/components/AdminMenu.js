@@ -10,9 +10,9 @@ const AdminMenu = () => {
   const [category, setCategory] = useState("Coffee");
   const [image, setImage] = useState(null);
   const [menuItems, setMenuItems] = useState([]);
-  const [editItem, setEditItem] = useState(null);  // Untuk menyimpan item yang sedang diedit
+  const [editItem, setEditItem] = useState(null);  //  menyimpan item yang  diedit
 
-  // Ambil data menu dari Firestore
+  // Ambil data menu dari firebase
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "menus"), (snapshot) => {
       const menuData = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
@@ -21,11 +21,10 @@ const AdminMenu = () => {
     return () => unsubscribe();
   }, []);
 
-  // Fungsi untuk upload gambar ke Cloudinary dan simpan URL ke Firebase
+  // upload gambar ke cloudinary dan simpan URL ke firebase
   const uploadImageToCloudinary = async (imageFile) => {
-    const cloudName = "dvnriwaci";  // Ganti dengan nama Cloudinary Anda
-    const uploadPreset = "product_photos";  // Ganti dengan preset upload Anda
-
+    const cloudName = "dvnriwaci"; 
+    const uploadPreset = "product_photos";  
     const formData = new FormData();
     formData.append("file", imageFile);
     formData.append("upload_preset", uploadPreset);
@@ -46,7 +45,7 @@ const AdminMenu = () => {
     }
   };
 
-  // Fungsi untuk menambahkan atau memperbarui menu
+  // menambahkan atau memperbarui menu
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -89,22 +88,22 @@ const AdminMenu = () => {
     }
   };
 
-  // Fungsi untuk mengedit item menu
+  // mengedit item menu
   const handleEdit = (item) => {
     setTitle(item.title);
     setDescription(item.description);
     setPrice(item.price);
     setCategory(item.category);
-    setImage(null); // Set image ke null agar admin bisa memilih gambar baru
-    setEditItem(item); // Set item yang akan diedit
+    setImage(null); // set image ke null biar admin bisa milih gambar baru
+    setEditItem(item); // set item yang mau diedit
   };
 
-  // Fungsi untuk menghapus menu
+  // menghapus menu
   const handleDelete = async (id) => {
     if (window.confirm("Apakah Anda yakin ingin menghapus menu ini?")) {
       try {
         await deleteDoc(doc(db, "menus", id));
-        setMenuItems(menuItems.filter((item) => item.id !== id)); // Update UI setelah dihapus
+        setMenuItems(menuItems.filter((item) => item.id !== id)); // update UI setelah dihapus
       } catch (error) {
         console.error("Gagal menghapus menu:", error);
       }
